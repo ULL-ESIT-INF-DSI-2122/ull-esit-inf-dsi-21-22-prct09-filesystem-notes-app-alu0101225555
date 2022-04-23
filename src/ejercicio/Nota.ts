@@ -6,16 +6,18 @@ import * as fs from 'fs';
 
 export class Nota {
 
-  constructor( protected usuario: string, protected titulo: string, protected cuerpo: string, protected color: string) {
-    this.usuario = usuario;
+  constructor( protected titulo: string, protected cuerpo: string, protected color: string) {
+    //this.usuario = usuario;
     this.titulo = titulo;
     this.cuerpo = cuerpo;
     this.color = color;
   }
 
+  /*
   getUsuario() {
     return this.usuario;
   }
+  */
 
   getTitulo() {
     return this.titulo;
