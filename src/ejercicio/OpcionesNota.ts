@@ -11,8 +11,8 @@ export class OperacionesNotas {
     constructor(){}
 
     leer(usuario: string, titulo: string) {
-        if (existsSync('./src/ejercicio/JSON/${usuario}/${titulo}.json')) {
-            readFile('./src/ejercicio/JSON/${usuario}/${titulo}.json', (err, data) => {
+        if (existsSync(`./src/ejercicio/JSON/${usuario}/${titulo}.json`)) {
+            readFile(`./src/ejercicio/JSON/${usuario}/${titulo}.json`, (err, data) => {
                 if(err) {
                     console.log(chalk.red("EEROR de lectura"));
                 }else {

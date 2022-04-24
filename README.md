@@ -171,6 +171,55 @@ agregar(nota: Nota, usuario: string) {
     }
 ```
 
+- **leer():** Método usado para leer una nota determinada. Recibe como parámetro el nombre de un usuario y el título de la nota que se desea leer, ambos de tipo `string`. A continuación, lo que hacemos es comprobar con `existsSync` si existe dicho fichero en ese usuario y leerlo, haciendo uso de `readFile` y decidiendo el color que tiene asignado en dicha nota para sallir por pantalla (`switch`).
+
+```
+leer(usuario: string, titulo: string) {
+        if (existsSync(`./src/ejercicio/JSON/${usuario}/${titulo}.json`)) {
+            readFile(`./src/ejercicio/JSON/${usuario}/${titulo}.json`, (err, data) => {
+                if(err) {
+                    console.log(chalk.red("EEROR de lectura"));
+                }else {
+                    const aux = JSON.parse(data.toString());
+                    switch (aux.color) {
+                        case "Rojo":
+                            console.log(chalk.red(`\n${aux.titulo}\n${aux.cuerpo}\n`));
+                            break;
+                        case "Verde":
+                            console.log(chalk.green(`\n${aux.titulo}\n${aux.cuerpo}\n`));
+                            break;
+                        case "Azul":
+                            console.log(chalk.blue(`\n${aux.titulo}\n${aux.cuerpo}\n`));
+                            break;
+                        case "Amarillo":
+                            console.log(chalk.yellow(`\n${aux.titulo}\n${aux.cuerpo}\n`));
+                            break;
+                    }
+                }
+            });
+        }else {
+            console.log(chalk.red("ERROR: Nota inexistente"));
+        }
+    }
+```
+
+- **eliminar():** Método usado para eliminar una determinada nota. Recibe como parámetros un título de una nota y un usuario. A continuación, definiremos en una constante `ficheroruta` la ruta del fichero pasado como parámetros.
+
+Una vez tenemos dicha ruta, comprobamos con `existsSync` si existe ese fichero, en caso de existir hacemos uso de `rmSync` para elimimar el fichero, y en caso contrario, lanzará un mensaje de error.
+
+```
+eliminar(titulo: string, usuario: string) {
+        const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + titulo + '.json'; 
+
+        if (existsSync(ficheroruta)) {
+            rmSync(ficheroruta);
+            console.log(chalk.green("Nota eliminada correctamente"));
+          } else {
+            console.log(chalk.red("ERROR: nota no encontrada"));
+          }
+    }
+```
+
 ## Conclusiones
 
 Proyecto interesante de desarrollar ya que manejamos nuevas herramientas que no hemos usado con anterioridad y con conceptos nuevos aunque esta práctica no ha llegado a cumplirse con éxito ya que lanza errores que no termino de entender, como por ejemplo, si trato de ejecutar haciendo `node/dist/ejercicio/menu.js` con la opción que quiero me deniega el perimiso, además haciendo uso de `chalk` para darle el formato deseado, funciona en algunas partes pero en otras dice `chalk.green(...) no es una función`. 
