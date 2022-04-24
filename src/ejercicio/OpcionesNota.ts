@@ -45,7 +45,7 @@ export class OperacionesNotas {
         if (existsSync(ruta)) {
     
             if (existsSync(ficheroruta)) {
-              console.log(chalk.red("RROR: Título ya usado"));
+              console.log(chalk.red("ERROR: Título ya usado"));
             } else {
               writeFileSync(ficheroruta, `{\n\t"titulo": "${nota.getTitulo()}",\n\t"cuerpo": "${nota.getCuerpo()}",\n\t"color": "${nota.getColor()}"\n}`);
               console.log(chalk.green("Nota agregada correctamente"));

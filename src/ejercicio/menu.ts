@@ -73,4 +73,33 @@ yargs.command({
   },
 });
 
+/**
+ * Comando 'eliminar'
+ */
+ yargs.command({
+  command: 'eliminar',
+  describe: 'eliminar una nota',
+  builder: {
+    user: {
+      describe: 'Usuario de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Título de la nota',
+      demandOption: true,
+      type: 'string',
+    }
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string') {
+        //logica eliminar nueva nota
+      const gestor = new OperacionesNotas();
+      gestor.eliminar(argv.title,argv.user);
+    }else {
+      console.log(chalk.red("ERROR en eliminar nota"))
+    }
+  },
+});
+
 yargs.parse(); 

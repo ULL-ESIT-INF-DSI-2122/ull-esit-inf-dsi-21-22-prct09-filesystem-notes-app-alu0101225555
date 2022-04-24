@@ -1,6 +1,7 @@
 import "mocha";
 import {expect} from "chai";
 import {Nota} from '../src/ejercicio/Nota';
+import {OperacionesNotas} from '../src/ejercicio/OpcionesNota';
 
 describe('Test práctica 9', () => {
 
@@ -9,6 +10,7 @@ describe('Test práctica 9', () => {
     let nota3 = new Nota("Prueba 3", "Probando clase Nota", "Azul");
     let nota4 = new Nota("Prueba 4", "Probando clase Nota", "Amarillo");
     let notaDefault = new Nota("Prueba Default", "Probando clase Nota", "Marrón");
+    let gestor = new OperacionesNotas();
 
 
 
@@ -67,6 +69,20 @@ describe('Test práctica 9', () => {
         it('Cuerpo caso Default', () => {
             expect(notaDefault.mostrarCuerpo()).not.to.be.equal(null)
         });
+
+    });
+
+    describe('Comprobaciones OperacionesNotas: ',() => {
+
+        it('Método agregar nota , agregar()', () => {
+            expect(gestor.agregar(nota1, "usuario1"));
+        });
+
+        it('Método eliminar nota , eliminar()', () => {
+            expect(gestor.eliminar("Prueba", "usuario1"));
+        });
+
+        
 
     });
 
