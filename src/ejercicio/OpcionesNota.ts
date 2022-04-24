@@ -45,8 +45,8 @@ export class OperacionesNotas {
 
     /**
      * Método para agregar una nota
-     * @param nota 
-     * @param usuario 
+     * @param nota Nota que se desea crear
+     * @param usuario Usuario al que se le desea añadir la nota
      */
     agregar(nota: Nota, usuario: string) {
         const ruta: string = './src/ejercicio/JSON' + usuario;
@@ -68,6 +68,11 @@ export class OperacionesNotas {
           }
     }
 
+    /**
+     * Método para eliminar una nota
+     * @param titulo Titulo de la nota que se quiere eliminar
+     * @param usuario Usuario al que pertenece la nota
+     */
     eliminar(titulo: string, usuario: string) {
         const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + titulo + '.json'; 
 
@@ -79,6 +84,13 @@ export class OperacionesNotas {
           }
     }
 
+    /**
+     * Método para editar una nota existente
+     * @param usuario Usuario al que pertence una nota
+     * @param titulo Titulo de la nota
+     * @param cuerpo Cuerpo de la nota
+     * @param color Color de la nota
+     */
     editar(usuario: string, titulo: string, cuerpo: string, color: string) {
         const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + titulo + '.json';
         
