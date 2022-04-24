@@ -72,6 +72,7 @@ describe('Test práctica 9', () => {
 
     });
 
+    /*
     describe('Comprobaciones OperacionesNotas: ',() => {
 
         it('Método agregar nota , agregar()', () => {
@@ -82,8 +83,14 @@ describe('Test práctica 9', () => {
             expect(gestor.eliminar("Prueba", "usuario1"));
         });
 
-        
+        it('Método leer nota , leer()', () => {
+            expect(gestor.leer("Prueba2", "usuario1"));
+        });
+
+        it('Método editar nota , editar()', () => {
+            expect(gestor.editar("usuario1", "Prueba2", "Cuerpo prueba2 modificado", "Azul"));
+        });
 
     });
-
+    */
 });

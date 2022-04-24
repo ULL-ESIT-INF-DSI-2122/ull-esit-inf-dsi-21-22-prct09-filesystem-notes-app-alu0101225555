@@ -10,6 +10,11 @@ import * as chalk from 'chalk';
 export class OperacionesNotas {
     constructor(){}
 
+    /**
+     * Método para leer una nota
+     * @param usuario nombre del usuario deseado
+     * @param titulo titulo de la nota deseada
+     */
     leer(usuario: string, titulo: string) {
         if (existsSync(`./src/ejercicio/JSON/${usuario}/${titulo}.json`)) {
             readFile(`./src/ejercicio/JSON/${usuario}/${titulo}.json`, (err, data) => {
@@ -38,6 +43,11 @@ export class OperacionesNotas {
         }
     }
 
+    /**
+     * Método para agregar una nota
+     * @param nota 
+     * @param usuario 
+     */
     agregar(nota: Nota, usuario: string) {
         const ruta: string = './src/ejercicio/JSON' + usuario;
         const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + nota.getTitulo() + '.json'; 
@@ -66,6 +76,17 @@ export class OperacionesNotas {
             console.log(chalk.green("Nota eliminada correctamente"));
           } else {
             console.log(chalk.red("ERROR: nota no encontrada"));
+          }
+    }
+
+    editar(usuario: string, titulo: string, cuerpo: string, color: string) {
+        const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + titulo + '.json';
+        
+        if (existsSync(ficheroruta)) {
+            writeFileSync(ficheroruta, `{\n\t"titulo": "${titulo}",\n\t"cuerpo": "${cuerpo}",\n\t"color": "${color}"\n}`);
+            console.log(chalk.green("Nota modificada correctamente"));
+          } else {
+            console.log(chalk.red("Nota no encontrada"));
           }
     }
 }

@@ -220,6 +220,28 @@ eliminar(titulo: string, usuario: string) {
     }
 ```
 
+- **editar():** Método usado para editar una nota existente. Recibe como parámetros el usuaro al que pertenece la nota, título, cuerpo y color de la nota.
+
+A continuación, comprobamos con `existsSync` si existe el fichero deseado. De ser así, escribimos los datos pasados en dicha nota, y en caso constrario, se imprimirá un error por pantalla.
+
+```
+editar(usuario: string, titulo: string, cuerpo: string, color: string) {
+        const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + titulo + '.json';
+        
+        if (existsSync(ficheroruta)) {
+            writeFileSync(ficheroruta, `{\n\t"titulo": "${titulo}",\n\t"cuerpo": "${cuerpo}",\n\t"color": "${color}"\n}`);
+            console.log(chalk.green("Nota modificada correctamente"));
+          } else {
+            console.log(chalk.red("Nota no encontrada"));
+          }
+
+    }
+```
+
 ## Conclusiones
 
-Proyecto interesante de desarrollar ya que manejamos nuevas herramientas que no hemos usado con anterioridad y con conceptos nuevos aunque esta práctica no ha llegado a cumplirse con éxito ya que lanza errores que no termino de entender, como por ejemplo, si trato de ejecutar haciendo `node/dist/ejercicio/menu.js` con la opción que quiero me deniega el perimiso, además haciendo uso de `chalk` para darle el formato deseado, funciona en algunas partes pero en otras dice `chalk.green(...) no es una función`. 
+Proyecto interesante de desarrollar ya que manejamos nuevas herramientas que no hemos usado con anterioridad y con conceptos nuevos aunque esta práctica no ha llegado a cumplirse con éxito ya que lanza errores que no termino de entender, como por ejemplo, si trato de ejecutar haciendo `node/dist/ejercicio/menu.js` con la opción que quiero me deniega el perimiso, además haciendo uso de `chalk` para darle el formato deseado, funciona en algunas partes pero en otras dice `chalk.green(...) no es una función` pese a tener la versión actualizada.
+
+## Tests
+
+

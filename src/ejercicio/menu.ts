@@ -102,4 +102,44 @@ yargs.command({
   },
 });
 
+/**
+ * Comando 'editar'
+ */
+ yargs.command({
+  command: 'editar',
+  describe: 'Editar una nota',
+  builder: {
+    user: {
+      describe: 'Nombre de usuario',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Título de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Cuerpo de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: 'Color de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string' &&
+    typeof argv.body === 'string' && typeof argv.color === 'string') {
+      const gestor = new OperacionesNotas();
+      gestor.editar(argv.user, argv.title, argv.body, argv.color);
+    } else {
+      console.log(chalk.red('ERROR en editar'));
+    }
+  },
+});
+
+console.log(chalk.green("Probando"));
 yargs.parse(); 
