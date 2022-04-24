@@ -244,4 +244,14 @@ Proyecto interesante de desarrollar ya que manejamos nuevas herramientas que no 
 
 ## Tests
 
+Salida de los tests de la clase `Nota`:
 
+![claseNota](img/claseNota.png)
+
+*Nota: los tests de la clase `OperacionesNotas` se encuentran definidos pero lanzan el siguiente error: `chalk.red is not a function`.*
+
+## Enlaces:
+
+[src](src)
+[test](tests)
+[documentación](docs)
