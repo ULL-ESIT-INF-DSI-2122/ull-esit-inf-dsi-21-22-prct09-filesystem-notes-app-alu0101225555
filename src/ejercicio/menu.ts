@@ -1,22 +1,76 @@
 import * as yargs from 'yargs';
 import * as fs from 'fs';
+import { OperacionesNotas } from './OpcionesNota';
+import * as chalk from 'chalk';
+import { Nota } from './Nota';
 
-
+/**
+ * Comando 'leer'
+ */
 yargs.command({
-    command: 'add',
-    describe: 'Add a new note',
+    command: 'leer',
+    describe: 'leer una nota',
     builder: {
-      title: {
-        describe: 'Note title',
+      user: {
+        describe: 'Usuario de la nota',
         demandOption: true,
         type: 'string',
       },
+      title: {
+        describe: 'Título de la nota',
+        demandOption: true,
+        type: 'string',
+      }
     },
     handler(argv) {
-      if (typeof argv.title === 'string') {
-          //logica crear nueva nota
+      if (typeof argv.user === 'string' && typeof argv.title === 'string') {
+          //logica leer nueva nota
+        const gestor = new OperacionesNotas();
+        gestor.leer(argv.user, argv.title);
+      }else {
+        console.log(chalk.red("ERROR en leer nota"))
       }
     },
 });
 
-yargs.parse(); //OBLIGATORIO en el MENU o DONDE SE LEAN LOS COMANDOS
+/**
+ * Comando 'agregar'
+ */
+ yargs.command({
+  command: 'agregar',
+  describe: 'agregar una nota',
+  builder: {
+    user: {
+      describe: 'Usuario de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Título de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Cuerpo de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: 'Color de la nota',
+      demandOption: true,
+      type: 'string',
+    }
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string' && typeof argv.body === 'string' && typeof argv.color === 'string') {
+        //logica agregar nueva nota
+      const gestor = new OperacionesNotas();
+      const notaNueva = new Nota(argv.title, argv.body, argv.color);
+      gestor.agregar(notaNueva, argv.user);
+    }else {
+      console.log(chalk.red("ERROR en agregar nota"))
+    }
+  },
+});
+
+yargs.parse(); 
