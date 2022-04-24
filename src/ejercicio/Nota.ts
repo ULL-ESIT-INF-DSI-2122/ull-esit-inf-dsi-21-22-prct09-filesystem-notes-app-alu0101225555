@@ -1,9 +1,10 @@
-//trabajamos con api sincrona
 
 import chalk from 'chalk';
 import * as fs from 'fs';
 
-
+/**
+ * Clase que define la estructura de una nota y el color con el que se mostrará.
+ */
 export class Nota {
 
   constructor( protected titulo: string, protected cuerpo: string, protected color: string) {

@@ -69,7 +69,107 @@ Para los demás comandos necesarios, los creamos de manera similar haciendo los 
 
 **Nota.ts:**
 
+```
+export class Nota {
 
+  constructor( protected titulo: string, protected cuerpo: string, protected color: string) {
+    //this.usuario = usuario;
+    this.titulo = titulo;
+    this.cuerpo = cuerpo;
+    this.color = color;
+  }
+
+  /*
+  getUsuario() {
+    return this.usuario;
+  }
+  */
+
+  getTitulo() {
+    return this.titulo;
+  }
+
+  getCuerpo() {
+    return this.cuerpo;
+  }
+
+  getColor() {
+    return this.color;
+  }
+
+  mostrarTitulo(): void {
+    switch (this.color) {
+      case "Rojo":
+        console.log(chalk.red(this.titulo));
+        break;
+      case "Verde":
+        console.log(chalk.green(this.titulo));
+        break;
+      case "Azul":
+        console.log(chalk.blue(this.titulo));
+        break;
+      case "Amarillo":
+        console.log(chalk.yellow(this.titulo));
+        break;
+      default:
+        console.log(chalk.red("ERROR: Color no permitido"));
+        break;
+    }
+  }
+
+  mostrarCuerpo(): void {
+    switch (this.color) {
+      case "Rojo":
+        console.log(chalk.red(this.cuerpo));
+        break;
+      case "Verde":
+        console.log(chalk.green(this.cuerpo));
+        break;
+      case "Azul":
+        console.log(chalk.blue(this.cuerpo));
+        break;
+      case "Amarillo":
+        console.log(chalk.yellow(this.cuerpo));
+        break;
+      default:
+        console.log(chalk.red("ERROR: Color no permitido"));
+        break;
+    }
+  }
+}
+```
+
+En este fichero encontramos la clase `Nota` en la que establecemos la estructura de cada nota (título, cuerpo de la nota y el color con el que se escribirá). Además, definimos un `switch` para el cuerpo y otro para el título,cuyas funciones son imprimir el cuerpo y el título, respectivamente, del color que recibe.
+
+**OpcionesNota.ts:**
+
+Contiene los diferentes métodos con los que se podrá interacturar, es decir, añadir, listar, editar, eliminar o leer una nota.
+
+- **agregar()**: Método usado para añadir una nota. Recibe como parámetros una nota de tipo `Nota` y el nombre de un usuario de tipo `string`. Además definimos en 2 constantes, `ruta` y `ficheroruta` las rutas donde encontrar los JSON correspondientes a cada nota (guardados `./src/JSON/usarioX`) y en el segundo caso, el fichero en concreto.
+
+Una vez tenemos esto, definimos la lógica, en la que comprobamos con `existsSync(ruta)` si la ruta del usuario existe, y en caso de devolver `true`, comprueba con el mismo comando (pero esta vez con la ruta y el archivo concreto) si ya existe una nota con dicho nombre, en caso de existir se avisará de un error y en caso contrario, se creará. Además, si la ruta de dicho usuario no existe, previamente se creará el directorio haciendo uso de `mkdirSync(ruta)`. 
+
+```
+agregar(nota: Nota, usuario: string) {
+        const ruta: string = './src/ejercicio/JSON' + usuario;
+        const ficheroruta: string = './src/ejercicio/JSON' + usuario + '/' + nota.getTitulo() + '.json'; 
+
+        if (existsSync(ruta)) {
+    
+            if (existsSync(ficheroruta)) {
+              console.log(chalk.red("ERROR: Título ya usado"));
+            } else {
+              writeFileSync(ficheroruta, `{\n\t"titulo": "${nota.getTitulo()}",\n\t"cuerpo": "${nota.getCuerpo()}",\n\t"color": "${nota.getColor()}"\n}`);
+              console.log(chalk.green("Nota agregada correctamente"));
+            }
+          } else {
+            console.log(chalk.green("Directorio personal creado"));
+            mkdirSync(ruta);
+            writeFileSync(ficheroruta, `{\n\t"titulo": "${nota.getTitulo()}",\n\t"cuerpo": "${nota.getCuerpo()}",\n\t"color": "${nota.getColor()}"\n}`);
+            console.log(chalk.green("Nota agregada correctamente"));
+          }
+    }
+```
 
 ## Conclusiones
 
